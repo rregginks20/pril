@@ -1,0 +1,287 @@
+﻿<Page x:Class="YanaulKioskPerfect.PaymentMenuPage"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+Title="Оплата услуги" Background="#F5F9FC">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="40,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- === ЗАГОЛОВОК === -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                <TextBlock Text="💳 ОПЛАТА УСЛУГИ" FontSize="36" FontWeight="Bold" 
+Foreground="#00695C" HorizontalAlignment="Center"/>
+                <TextBlock Text="Выберите способ оплаты" FontSize="18" Foreground="Gray" 
+HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+
+            <!-- === ИНФОРМАЦИЯ ОБ ОПЛАТЕ === -->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Background="White" 
+MaxWidth="700" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <StackPanel Margin="30">
+                    <TextBlock Text="📋 Детали оплаты" FontSize="24" FontWeight="Bold" 
+Foreground="#00695C" Margin="0,0,0,20"/>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Услуга:" FontSize="16" Foreground="Gray" Grid.Column="0"/>
+                        <TextBlock x:Name="ServiceNameText" Text="Прием терапевта" FontSize="16" 
+FontWeight="SemiBold" Grid.Column="1" Foreground="#333"/>
+                    </Grid>
+
+                    <Grid Margin="0,15,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Врач:" FontSize="16" Foreground="Gray" Grid.Column="0"/>
+                        <TextBlock x:Name="DoctorNameText" Text="Иванова А.П." FontSize="16" 
+FontWeight="SemiBold" Grid.Column="1" Foreground="#333"/>
+                    </Grid>
+
+                    <Grid Margin="0,15,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Дата и время:" FontSize="16" Foreground="Gray" Grid.Column="0"/>
+                        <TextBlock x:Name="DateTimeText" Text="15.06.2026 14:00" FontSize="16" 
+FontWeight="SemiBold" Grid.Column="1" Foreground="#333"/>
+                    </Grid>
+
+                    <Border Background="#E8F5E9" CornerRadius="10" Padding="20" Margin="0,25,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="💰 К оплате:" FontSize="20" FontWeight="Bold" 
+Foreground="#2E7D32" Grid.Column="0"/>
+                            <TextBlock x:Name="AmountText" Text="500 ₽" FontSize="32" FontWeight="Bold" 
+Foreground="#2E7D32" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- === СПОСОБЫ ОПЛАТЫ (КАК НА WB) === -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}" Background="White" 
+MaxWidth="700" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <StackPanel Margin="30">
+                    <TextBlock Text="Выберите способ оплаты" FontSize="20" FontWeight="Bold" 
+Foreground="#00695C" Margin="0,0,0,20"/>
+
+                    <!-- БАНКОВСКАЯ КАРТА -->
+                    <Border x:Name="CardPaymentBorder" Background="#F5F5F5" CornerRadius="15" 
+Padding="25" Margin="0,0,0,15" BorderBrush="#2196F3" BorderThickness="3"
+MouseLeftButtonDown="CardPaymentBorder_MouseLeftButtonDown" Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Background="#2196F3" CornerRadius="10" 
+Width="60" Height="60" Margin="0,0,20,0">
+                                <TextBlock Text="💳" FontSize="32" HorizontalAlignment="Center" 
+VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Банковская карта" FontSize="18" FontWeight="Bold" 
+Foreground="#333"/>
+                                <TextBlock Text="Visa, Mastercard, МИР" FontSize="14" Foreground="#666" 
+Margin="0,5,0,0"/>
+                            </StackPanel>
+
+                            <Ellipse Grid.Column="2" x:Name="CardRadio" Width="28" Height="28" 
+Stroke="#2196F3" StrokeThickness="3" Fill="White"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- SBERPAY -->
+                    <Border x:Name="SberPayBorder" Background="#F5F5F5" CornerRadius="15" 
+Padding="25" Margin="0,0,0,15" BorderBrush="#21A038" BorderThickness="3"
+MouseLeftButtonDown="SberPayBorder_MouseLeftButtonDown" Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Background="#21A038" CornerRadius="10" 
+Width="60" Height="60" Margin="0,0,20,0">
+                                <TextBlock Text="🏦" FontSize="32" HorizontalAlignment="Center" 
+VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="SberPay" FontSize="18" FontWeight="Bold" Foreground="#333"/>
+                                <TextBlock Text="Быстрая оплата через СберБанк" FontSize="14" Foreground="#666" 
+Margin="0,5,0,0"/>
+                            </StackPanel>
+
+                            <Ellipse Grid.Column="2" x:Name="SberPayRadio" Width="28" Height="28" 
+Stroke="#21A038" StrokeThickness="3" Fill="White"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- TINKOFF PAY -->
+                    <Border x:Name="TinkoffPayBorder" Background="#F5F5F5" CornerRadius="15" 
+Padding="25" Margin="0,0,0,15" BorderBrush="#FFDD2D" BorderThickness="3"
+MouseLeftButtonDown="TinkoffPayBorder_MouseLeftButtonDown" Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Background="#FFDD2D" CornerRadius="10" 
+Width="60" Height="60" Margin="0,0,20,0">
+                                <TextBlock Text="🏦" FontSize="32" HorizontalAlignment="Center" 
+VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Tinkoff Pay" FontSize="18" FontWeight="Bold" Foreground="#333"/>
+                                <TextBlock Text="Оплата через Тинькофф" FontSize="14" Foreground="#666" 
+Margin="0,5,0,0"/>
+                            </StackPanel>
+
+                            <Ellipse Grid.Column="2" x:Name="TinkoffPayRadio" Width="28" Height="28" 
+Stroke="#FFDD2D" StrokeThickness="3" Fill="White"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- НАЛИЧНЫЕ -->
+                    <Border x:Name="CashBorder" Background="#F5F5F5" CornerRadius="15" 
+Padding="25" Margin="0,0,0,15" BorderBrush="#757575" BorderThickness="3"
+MouseLeftButtonDown="CashBorder_MouseLeftButtonDown" Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Background="#757575" CornerRadius="10" 
+Width="60" Height="60" Margin="0,0,20,0">
+                                <TextBlock Text="💵" FontSize="32" HorizontalAlignment="Center" 
+VerticalAlignment="Center"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Наличные в терминале" FontSize="18" FontWeight="Bold" 
+Foreground="#333"/>
+                                <TextBlock Text="Оплата наличными через терминал" FontSize="14" Foreground="#666" 
+Margin="0,5,0,0"/>
+                            </StackPanel>
+
+                            <Ellipse Grid.Column="2" x:Name="CashRadio" Width="28" Height="28" 
+Stroke="#757575" StrokeThickness="3" Fill="White"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- === ФОРМА ВВОДА КАРТЫ (показывается только для карты) === -->
+                    <Border x:Name="CardFormPanel" Background="#E3F2FD" CornerRadius="15" 
+Padding="25" Margin="0,20,0,0" Visibility="Visible">
+                        <StackPanel>
+                            <TextBlock Text="💳 Данные карты" FontSize="18" FontWeight="Bold" 
+Foreground="#1976D2" Margin="0,0,0,15"/>
+
+                            <!-- Номер карты -->
+                            <TextBlock Text="Номер карты" FontSize="14" Foreground="Gray" Margin="0,0,0,5"/>
+                            <Border Background="White" CornerRadius="8" Padding="15,10" Margin="0,0,0,15"
+BorderBrush="#2196F3" BorderThickness="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="CardNumberTextBox" FontSize="18" Background="Transparent" 
+BorderThickness="0" Text="4276 0000 0000 0000" 
+TextChanged="CardNumberTextBox_TextChanged" MaxLength="19"/>
+                                    <TextBlock Grid.Column="1" Text="💳" FontSize="24" Margin="10,0,0,0"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Срок действия и CVV -->
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Срок действия" FontSize="14" Foreground="Gray" Margin="0,0,0,5"/>
+                                    <Border Background="White" CornerRadius="8" Padding="15,10" 
+BorderBrush="#2196F3" BorderThickness="2">
+                                        <TextBox x:Name="ExpiryTextBox" FontSize="18" Background="Transparent" 
+BorderThickness="0" Text="12/26" MaxLength="5"
+TextChanged="ExpiryTextBox_TextChanged"/>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="CVV/CVC" FontSize="14" Foreground="Gray" Margin="0,0,0,5"/>
+                                    <Border Background="White" CornerRadius="8" Padding="15,10" 
+BorderBrush="#2196F3" BorderThickness="2">
+                                        <PasswordBox x:Name="CvvPasswordBox" FontSize="18" Background="Transparent" 
+BorderThickness="0" MaxLength="3" Width="80"
+HorizontalAlignment="Left"/>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Владелец карты -->
+                            <TextBlock Text="Владелец карты" FontSize="14" Foreground="Gray" Margin="0,0,0,5"/>
+                            <Border Background="White" CornerRadius="8" Padding="15,10" Margin="0,0,0,20"
+BorderBrush="#2196F3" BorderThickness="2">
+                                <TextBox x:Name="CardHolderTextBox" FontSize="18" Background="Transparent" 
+BorderThickness="0" Text="IVAN IVANOV" MaxLength="25"/>
+                            </Border>
+
+                            <!-- Безопасность -->
+                            <Border Background="#FFF3E0" CornerRadius="10" Padding="15" Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🔒" FontSize="24" Margin="0,0,15,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="Безопасная оплата" FontSize="15" FontWeight="SemiBold" 
+Foreground="#E65100"/>
+                                        <TextBlock Text="Данные карты зашифрованы" FontSize="13" 
+Foreground="#666" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </Border>
+
+            <!-- === КНОПКИ === -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,40">
+                <Button x:Name="BtnPay" Content="💳 ОПЛАТИТЬ" Width="300" Height="70" 
+FontSize="20" FontWeight="Bold" Background="#4CAF50" Foreground="White"
+BorderThickness="0" Click="BtnPay_Click" Cursor="Hand" Margin="0,0,20,0"/>
+                <Button x:Name="BtnCancel" Content="❌ ОТМЕНА" Width="200" Height="70" FontSize="20" 
+Background="#F44336" Foreground="White" BorderThickness="0" 
+Click="BtnCancel_Click" Cursor="Hand"/>
+            </StackPanel>
+
+        </Grid>
+    </ScrollViewer>
+</Page>

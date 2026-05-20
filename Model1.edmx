@@ -1,0 +1,1502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище YanaulCRBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnalysisResults">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AnalysisId" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ResultDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StatusRU" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusBA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DoctorComment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AnalysisType">
+          <Key>
+            <PropertyRef Name="AnalysisId" />
+          </Key>
+          <Property Name="AnalysisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRU" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameBA" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DaysToResult" Type="int" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="100" />
+          <Property Name="Preparation" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PatientPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="AppointmentTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="TicketNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+          <Property Name="IsVaccination" Type="bit" />
+          <Property Name="IsOnline" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="Diagnosis" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Certificate">
+          <Key>
+            <PropertyRef Name="CertificateId" />
+          </Key>
+          <Property Name="CertificateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientPolicy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="IssueDate" Type="datetime2" Precision="7" />
+          <Property Name="CertificateType" Type="nvarchar" MaxLength="100" />
+          <Property Name="CertificateText" Type="nvarchar(max)" />
+          <Property Name="ValidUntil" Type="datetime2" Precision="7" />
+          <Property Name="FileUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="EmailSent" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MessageText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsUserMessage" Type="bit" Nullable="false" />
+          <Property Name="SentAt" Type="datetime2" Precision="7" />
+          <Property Name="IsRead" Type="bit" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullNameRU" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="FullNameBA" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SpecialtyRU" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SpecialtyBA" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Room" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="30" />
+          <Property Name="ExperienceYears" Type="int" />
+          <Property Name="Education" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsOnline" Type="bit" />
+          <Property Name="Rating" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="DoctorPhoto">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhotoData" Type="varbinary(max)" />
+          <Property Name="PhotoType" Type="nvarchar" MaxLength="50" />
+          <Property Name="UploadedAt" Type="datetime2" Precision="7" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="HealthMetrics">
+          <Key>
+            <PropertyRef Name="MetricId" />
+          </Key>
+          <Property Name="MetricId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MetricType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value1" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Value2" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MeasureDate" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="HomeVisits">
+          <Key>
+            <PropertyRef Name="VisitId" />
+          </Key>
+          <Property Name="VisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Symptoms" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="VisitDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MedicalCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="BloodType" Type="nvarchar" MaxLength="15" />
+          <Property Name="Allergies" Type="nvarchar" MaxLength="500" />
+          <Property Name="ChronicDiseases" Type="nvarchar" MaxLength="500" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientPolicy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="PatientPhotos">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhotoData" Type="varbinary(max)" />
+          <Property Name="PhotoType" Type="nvarchar" MaxLength="50" />
+          <Property Name="UploadedAt" Type="datetime2" Precision="7" />
+          <Property Name="UploadedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ServiceRU" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ServiceBA" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime2" Precision="7" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsRefunded" Type="bit" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime2" Precision="7" />
+          <Property Name="ValidUntil" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Medicines" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DosageInstructions" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsPrinted" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Referral">
+          <Key>
+            <PropertyRef Name="ReferralId" />
+          </Key>
+          <Property Name="ReferralId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientPolicy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="SpecialtyTarget" Type="nvarchar" MaxLength="100" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SickLeave">
+          <Key>
+            <PropertyRef Name="SickLeaveId" />
+          </Key>
+          <Property Name="SickLeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientPolicy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SymptomRules">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RecommendedSpecialty" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TriageRecords">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserInput" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DetectedSymptoms" Type="nvarchar(max)" />
+          <Property Name="RecommendedDoctorSpecialty" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecommendedDoctorId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationId" />
+          </Key>
+          <Property Name="VaccinationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientPolicy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="VaccineName" Type="nvarchar" MaxLength="200" />
+          <Property Name="VaccinationDate" Type="datetime" />
+          <Property Name="NextVaccinationDate" Type="datetime" />
+          <Property Name="SeriesNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="CertificateUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmailSent" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Vaccine">
+          <Key>
+            <PropertyRef Name="VaccineId" />
+          </Key>
+          <Property Name="VaccineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRU" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameBA" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescriptionRU" Type="nvarchar" MaxLength="500" />
+          <Property Name="DescriptionBA" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DurationMinutes" Type="int" />
+          <Property Name="AgeRestrictions" Type="nvarchar" MaxLength="100" />
+          <Property Name="Availability" Type="nvarchar" MaxLength="50" />
+          <Property Name="NextDoseDays" Type="int" />
+        </EntityType>
+        <EntityType Name="VirtualQueue">
+          <Key>
+            <PropertyRef Name="QueueId" />
+          </Key>
+          <Property Name="QueueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentId" Type="int" Nullable="false" />
+          <Property Name="QueuePosition" Type="int" Nullable="false" />
+          <Property Name="EstimatedWaitMinutes" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" />
+          <Property Name="Notified" Type="bit" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <Association Name="FK_AnalysisResults_AnalysisType">
+          <End Role="AnalysisType" Type="Self.AnalysisType" Multiplicity="1" />
+          <End Role="AnalysisResults" Type="Self.AnalysisResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalysisType">
+              <PropertyRef Name="AnalysisId" />
+            </Principal>
+            <Dependent Role="AnalysisResults">
+              <PropertyRef Name="AnalysisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnalysisResults_AnalysisTypes">
+          <End Role="AnalysisType" Type="Self.AnalysisType" Multiplicity="1" />
+          <End Role="AnalysisResults" Type="Self.AnalysisResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalysisType">
+              <PropertyRef Name="AnalysisId" />
+            </Principal>
+            <Dependent Role="AnalysisResults">
+              <PropertyRef Name="AnalysisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_AnalysisResults_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_AnalysisResults_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_AnalysisResults_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_AnalysisResults_MedicalCards" />-->
+        <Association Name="FK_Appointment_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Appointment_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Appointment_MedicalCard" />-->
+        <Association Name="FK_Appointments_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Appointments_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Appointments_MedicalCards" />-->
+        <Association Name="FK_Certificate_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Certificate" Type="Self.Certificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Certificate">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Certificate_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Certificate_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_ChatMessage_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_ChatMessage_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_ChatMessages_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_ChatMessages_MedicalCards" />-->
+        <Association Name="FK_DoctorPhoto_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DoctorPhoto" Type="Self.DoctorPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DoctorPhoto">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_HealthMetrics_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_HealthMetrics_MedicalCards" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_HomeVisits_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_HomeVisits_MedicalCards" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Notification_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Notification_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_PatientPhotos_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_PatientPhotos_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Payment_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Payment_MedicalCard" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Payments_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Payments_MedicalCards" />-->
+        <Association Name="FK_Prescription_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Prescription_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Prescription_MedicalCard" />-->
+        <Association Name="FK_Prescriptions_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Prescriptions_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Prescriptions_MedicalCards" />-->
+        <Association Name="FK_Referral_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Referral" Type="Self.Referral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Referral">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Referral_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Referral_MedicalCard" />-->
+        <Association Name="FK_SickLeave_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="SickLeave" Type="Self.SickLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="SickLeave">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_SickLeave_MedicalCard" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_SickLeave_MedicalCard" />-->
+        <Association Name="FK_Triage_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="TriageRecords" Type="Self.TriageRecords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="TriageRecords">
+              <PropertyRef Name="RecommendedDoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_Triage_MedicalCards" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_Triage_MedicalCards" />-->
+        <Association Name="FK_Vaccination_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Vaccination">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VirtualQueue_Appointment">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VirtualQueue" Type="Self.VirtualQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="VirtualQueue">
+              <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VirtualQueue_Appointments">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+          <End Role="VirtualQueue" Type="Self.VirtualQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="VirtualQueue">
+              <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище YanaulCRBModelContainer">
+          <EntitySet Name="AnalysisResults" EntityType="Self.AnalysisResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnalysisType" EntityType="Self.AnalysisType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorPhoto" EntityType="Self.DoctorPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HealthMetrics" EntityType="Self.HealthMetrics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeVisits" EntityType="Self.HomeVisits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalCard" EntityType="Self.MedicalCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientPhotos" EntityType="Self.PatientPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Referral" EntityType="Self.Referral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SickLeave" EntityType="Self.SickLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SymptomRules" EntityType="Self.SymptomRules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TriageRecords" EntityType="Self.TriageRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccination" EntityType="Self.Vaccination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccine" EntityType="Self.Vaccine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VirtualQueue" EntityType="Self.VirtualQueue" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnalysisResults_AnalysisType" Association="Self.FK_AnalysisResults_AnalysisType">
+            <End Role="AnalysisType" EntitySet="AnalysisType" />
+            <End Role="AnalysisResults" EntitySet="AnalysisResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnalysisResults_AnalysisTypes" Association="Self.FK_AnalysisResults_AnalysisTypes">
+            <End Role="AnalysisType" EntitySet="AnalysisType" />
+            <End Role="AnalysisResults" EntitySet="AnalysisResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointment_Doctor" Association="Self.FK_Appointment_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Doctors" Association="Self.FK_Appointments_Doctors">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificate_Doctor" Association="Self.FK_Certificate_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Certificate" EntitySet="Certificate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorPhoto_Doctor" Association="Self.FK_DoctorPhoto_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorPhoto" EntitySet="DoctorPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescription_Doctor" Association="Self.FK_Prescription_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Doctors" Association="Self.FK_Prescriptions_Doctors">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Referral_Doctor" Association="Self.FK_Referral_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Referral" EntitySet="Referral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SickLeave_Doctor" Association="Self.FK_SickLeave_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="SickLeave" EntitySet="SickLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Triage_Doctors" Association="Self.FK_Triage_Doctors">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="TriageRecords" EntitySet="TriageRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccination_Doctor" Association="Self.FK_Vaccination_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Vaccination" EntitySet="Vaccination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VirtualQueue_Appointment" Association="Self.FK_VirtualQueue_Appointment">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="VirtualQueue" EntitySet="VirtualQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VirtualQueue_Appointments" Association="Self.FK_VirtualQueue_Appointments">
+            <End Role="Appointment" EntitySet="Appointment" />
+            <End Role="VirtualQueue" EntitySet="VirtualQueue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YanaulCRBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnalysisResult">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnalysisId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ResultDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StatusRU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusBA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorComment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnalysisType" Relationship="Self.FK_AnalysisResults_AnalysisTypes" FromRole="AnalysisResults" ToRole="AnalysisType" />
+        </EntityType>
+        <EntityType Name="AnalysisType">
+          <Key>
+            <PropertyRef Name="AnalysisId" />
+          </Key>
+          <Property Name="AnalysisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameBA" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DaysToResult" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Preparation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AnalysisResults" Relationship="Self.FK_AnalysisResults_AnalysisTypes" FromRole="AnalysisType" ToRole="AnalysisResults" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="TicketNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="IsVaccination" Type="Boolean" />
+          <Property Name="IsOnline" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Appointments_Doctors" FromRole="Appointment" ToRole="Doctor" />
+          <NavigationProperty Name="VirtualQueues" Relationship="Self.FK_VirtualQueue_Appointments" FromRole="Appointment" ToRole="VirtualQueue" />
+          <Property Name="Diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsUserMessage" Type="Boolean" Nullable="false" />
+          <Property Name="SentAt" Type="DateTime" Precision="7" />
+          <Property Name="IsRead" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullNameRU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullNameBA" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpecialtyRU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpecialtyBA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Room" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ExperienceYears" Type="Int32" />
+          <Property Name="Education" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsOnline" Type="Boolean" />
+          <Property Name="Rating" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Doctors" FromRole="Doctor" ToRole="Appointment" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Doctors" FromRole="Doctor" ToRole="Prescription" />
+          <NavigationProperty Name="TriageRecords" Relationship="Self.FK_Triage_Doctors" FromRole="Doctor" ToRole="TriageRecords" />
+          <NavigationProperty Name="Certificates" Relationship="YanaulCRBModel.FK_Certificate_Doctor" FromRole="Doctor" ToRole="Certificate" />
+          <NavigationProperty Name="DoctorPhotoes" Relationship="YanaulCRBModel.FK_DoctorPhoto_Doctor" FromRole="Doctor" ToRole="DoctorPhoto" />
+          <NavigationProperty Name="Referrals" Relationship="YanaulCRBModel.FK_Referral_Doctor" FromRole="Doctor" ToRole="Referral" />
+          <NavigationProperty Name="SickLeaves" Relationship="YanaulCRBModel.FK_SickLeave_Doctor" FromRole="Doctor" ToRole="SickLeave" />
+          <NavigationProperty Name="Vaccinations" Relationship="YanaulCRBModel.FK_Vaccination_Doctor" FromRole="Doctor" ToRole="Vaccination" />
+        </EntityType>
+        <EntityType Name="DoctorPhoto">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedAt" Type="DateTime" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Doctor" Relationship="YanaulCRBModel.FK_DoctorPhoto_Doctor" FromRole="DoctorPhoto" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="HealthMetric">
+          <Key>
+            <PropertyRef Name="MetricId" />
+          </Key>
+          <Property Name="MetricId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MetricType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value1" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Value2" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MeasureDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HomeVisit">
+          <Key>
+            <PropertyRef Name="VisitId" />
+          </Key>
+          <Property Name="VisitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Symptoms" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VisitDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MedicalCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BloodType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Allergies" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ChronicDiseases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PatientPhoto">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedAt" Type="DateTime" Precision="7" />
+          <Property Name="UploadedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ServiceRU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceBA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="7" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsRefunded" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Precision="7" />
+          <Property Name="ValidUntil" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Medicines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DosageInstructions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsPrinted" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Prescriptions_Doctors" FromRole="Prescription" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="SymptomRule">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecommendedSpecialty" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TriageRecord">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserInput" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DetectedSymptoms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecommendedDoctorSpecialty" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RecommendedDoctorId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Triage_Doctors" FromRole="TriageRecords" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vaccine">
+          <Key>
+            <PropertyRef Name="VaccineId" />
+          </Key>
+          <Property Name="VaccineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRU" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameBA" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescriptionRU" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionBA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DurationMinutes" Type="Int32" />
+          <Property Name="AgeRestrictions" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Availability" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NextDoseDays" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VirtualQueue">
+          <Key>
+            <PropertyRef Name="QueueId" />
+          </Key>
+          <Property Name="QueueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" />
+          <Property Name="QueuePosition" Type="Int32" Nullable="false" />
+          <Property Name="EstimatedWaitMinutes" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Notified" Type="Boolean" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK_VirtualQueue_Appointments" FromRole="VirtualQueue" ToRole="Appointment" />
+        </EntityType>
+        <Association Name="FK_AnalysisResults_AnalysisTypes">
+          <End Role="AnalysisType" Type="Self.AnalysisType" Multiplicity="1" />
+          <End Role="AnalysisResults" Type="Self.AnalysisResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalysisType">
+              <PropertyRef Name="AnalysisId" />
+            </Principal>
+            <Dependent Role="AnalysisResults">
+              <PropertyRef Name="AnalysisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VirtualQueue_Appointments">
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+          <End Role="VirtualQueue" Type="Self.VirtualQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointment">
+              <PropertyRef Name="AppointmentId" />
+            </Principal>
+            <Dependent Role="VirtualQueue">
+              <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Triage_Doctors">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="TriageRecords" Type="Self.TriageRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="TriageRecords">
+              <PropertyRef Name="RecommendedDoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YanaulCRBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnalysisResults" EntityType="Self.AnalysisResult" />
+          <EntitySet Name="AnalysisTypes" EntityType="Self.AnalysisType" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="ChatMessages" EntityType="Self.ChatMessage" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="DoctorPhotoes" EntityType="Self.DoctorPhoto" />
+          <EntitySet Name="HealthMetrics" EntityType="Self.HealthMetric" />
+          <EntitySet Name="HomeVisits" EntityType="Self.HomeVisit" />
+          <EntitySet Name="MedicalCards" EntityType="Self.MedicalCard" />
+          <EntitySet Name="PatientPhotos" EntityType="Self.PatientPhoto" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
+          <EntitySet Name="SymptomRules" EntityType="Self.SymptomRule" />
+          <EntitySet Name="TriageRecords" EntityType="Self.TriageRecord" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Vaccines" EntityType="Self.Vaccine" />
+          <EntitySet Name="VirtualQueues" EntityType="Self.VirtualQueue" />
+          <AssociationSet Name="FK_AnalysisResults_AnalysisTypes" Association="Self.FK_AnalysisResults_AnalysisTypes">
+            <End Role="AnalysisType" EntitySet="AnalysisTypes" />
+            <End Role="AnalysisResults" EntitySet="AnalysisResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Doctors" Association="Self.FK_Appointments_Doctors">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VirtualQueue_Appointments" Association="Self.FK_VirtualQueue_Appointments">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="VirtualQueue" EntitySet="VirtualQueues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Doctors" Association="Self.FK_Prescriptions_Doctors">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Prescription" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Triage_Doctors" Association="Self.FK_Triage_Doctors">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="TriageRecords" EntitySet="TriageRecords" />
+          </AssociationSet>
+          <EntitySet Name="Certificates" EntityType="YanaulCRBModel.Certificate" />
+          <EntitySet Name="Notifications" EntityType="YanaulCRBModel.Notification" />
+          <EntitySet Name="Vaccinations" EntityType="YanaulCRBModel.Vaccination" />
+          <EntitySet Name="Referrals" EntityType="YanaulCRBModel.Referral" />
+          <EntitySet Name="SickLeaves" EntityType="YanaulCRBModel.SickLeave" />
+          <EntitySet Name="sysdiagrams" EntityType="YanaulCRBModel.sysdiagram" />
+          <AssociationSet Name="FK_Certificate_Doctor" Association="YanaulCRBModel.FK_Certificate_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Certificate" EntitySet="Certificates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorPhoto_Doctor" Association="YanaulCRBModel.FK_DoctorPhoto_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorPhoto" EntitySet="DoctorPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Referral_Doctor" Association="YanaulCRBModel.FK_Referral_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Referral" EntitySet="Referrals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SickLeave_Doctor" Association="YanaulCRBModel.FK_SickLeave_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="SickLeave" EntitySet="SickLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccination_Doctor" Association="YanaulCRBModel.FK_Vaccination_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Vaccination" EntitySet="Vaccinations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Certificate">
+          <Key>
+            <PropertyRef Name="CertificateId" />
+          </Key>
+          <Property Name="CertificateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientPolicy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="IssueDate" Type="DateTime" Precision="7" />
+          <Property Name="CertificateType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CertificateText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ValidUntil" Type="DateTime" Precision="7" />
+          <Property Name="FileUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EmailSent" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Doctor" Relationship="YanaulCRBModel.FK_Certificate_Doctor" FromRole="Certificate" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientPolicy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationId" />
+          </Key>
+          <Property Name="VaccinationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientPolicy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="VaccineName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VaccinationDate" Type="DateTime" Precision="3" />
+          <Property Name="NextVaccinationDate" Type="DateTime" Precision="3" />
+          <Property Name="SeriesNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CertificateUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailSent" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Doctor" Relationship="YanaulCRBModel.FK_Vaccination_Doctor" FromRole="Vaccination" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Referral">
+          <Key>
+            <PropertyRef Name="ReferralId" />
+          </Key>
+          <Property Name="ReferralId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientPolicy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="SpecialtyTarget" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="YanaulCRBModel.FK_Referral_Doctor" FromRole="Referral" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="SickLeave">
+          <Key>
+            <PropertyRef Name="SickLeaveId" />
+          </Key>
+          <Property Name="SickLeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientPolicy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="YanaulCRBModel.FK_SickLeave_Doctor" FromRole="SickLeave" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Certificate_Doctor">
+          <End Type="YanaulCRBModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="YanaulCRBModel.Certificate" Role="Certificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Certificate">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorPhoto_Doctor">
+          <End Type="YanaulCRBModel.Doctor" Role="Doctor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="YanaulCRBModel.DoctorPhoto" Role="DoctorPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DoctorPhoto">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Referral_Doctor">
+          <End Type="YanaulCRBModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="YanaulCRBModel.Referral" Role="Referral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Referral">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SickLeave_Doctor">
+          <End Type="YanaulCRBModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="YanaulCRBModel.SickLeave" Role="SickLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="SickLeave">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccination_Doctor">
+          <End Type="YanaulCRBModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="YanaulCRBModel.Vaccination" Role="Vaccination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Vaccination">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище YanaulCRBModelContainer" CdmEntityContainer="YanaulCRBEntities2">
+          <EntitySetMapping Name="AnalysisResults">
+            <EntityTypeMapping TypeName="YanaulCRBModel.AnalysisResult">
+              <MappingFragment StoreEntitySet="AnalysisResults">
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="AnalysisId" ColumnName="AnalysisId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ResultDate" ColumnName="ResultDate" />
+                <ScalarProperty Name="StatusRU" ColumnName="StatusRU" />
+                <ScalarProperty Name="StatusBA" ColumnName="StatusBA" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="DoctorComment" ColumnName="DoctorComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnalysisTypes">
+            <EntityTypeMapping TypeName="YanaulCRBModel.AnalysisType">
+              <MappingFragment StoreEntitySet="AnalysisType">
+                <ScalarProperty Name="AnalysisId" ColumnName="AnalysisId" />
+                <ScalarProperty Name="NameRU" ColumnName="NameRU" />
+                <ScalarProperty Name="NameBA" ColumnName="NameBA" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DaysToResult" ColumnName="DaysToResult" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Preparation" ColumnName="Preparation" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsVaccination" ColumnName="IsVaccination" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="YanaulCRBModel.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="IsUserMessage" ColumnName="IsUserMessage" />
+                <ScalarProperty Name="SentAt" ColumnName="SentAt" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="FullNameRU" ColumnName="FullNameRU" />
+                <ScalarProperty Name="FullNameBA" ColumnName="FullNameBA" />
+                <ScalarProperty Name="SpecialtyRU" ColumnName="SpecialtyRU" />
+                <ScalarProperty Name="SpecialtyBA" ColumnName="SpecialtyBA" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ExperienceYears" ColumnName="ExperienceYears" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorPhotoes">
+            <EntityTypeMapping TypeName="YanaulCRBModel.DoctorPhoto">
+              <MappingFragment StoreEntitySet="DoctorPhoto">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
+                <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
+                <ScalarProperty Name="UploadedAt" ColumnName="UploadedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HealthMetrics">
+            <EntityTypeMapping TypeName="YanaulCRBModel.HealthMetric">
+              <MappingFragment StoreEntitySet="HealthMetrics">
+                <ScalarProperty Name="MetricId" ColumnName="MetricId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="MetricType" ColumnName="MetricType" />
+                <ScalarProperty Name="Value1" ColumnName="Value1" />
+                <ScalarProperty Name="Value2" ColumnName="Value2" />
+                <ScalarProperty Name="MeasureDate" ColumnName="MeasureDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeVisits">
+            <EntityTypeMapping TypeName="YanaulCRBModel.HomeVisit">
+              <MappingFragment StoreEntitySet="HomeVisits">
+                <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalCards">
+            <EntityTypeMapping TypeName="YanaulCRBModel.MedicalCard">
+              <MappingFragment StoreEntitySet="MedicalCard">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+                <ScalarProperty Name="ChronicDiseases" ColumnName="ChronicDiseases" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientPhotos">
+            <EntityTypeMapping TypeName="YanaulCRBModel.PatientPhoto">
+              <MappingFragment StoreEntitySet="PatientPhotos">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="PhotoData" ColumnName="PhotoData" />
+                <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
+                <ScalarProperty Name="UploadedAt" ColumnName="UploadedAt" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ServiceRU" ColumnName="ServiceRU" />
+                <ScalarProperty Name="ServiceBA" ColumnName="ServiceBA" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="IsRefunded" ColumnName="IsRefunded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescriptions">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Prescription">
+              <MappingFragment StoreEntitySet="Prescription">
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+                <ScalarProperty Name="Medicines" ColumnName="Medicines" />
+                <ScalarProperty Name="DosageInstructions" ColumnName="DosageInstructions" />
+                <ScalarProperty Name="IsPrinted" ColumnName="IsPrinted" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SymptomRules">
+            <EntityTypeMapping TypeName="YanaulCRBModel.SymptomRule">
+              <MappingFragment StoreEntitySet="SymptomRules">
+                <ScalarProperty Name="RuleId" ColumnName="RuleId" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="RecommendedSpecialty" ColumnName="RecommendedSpecialty" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TriageRecords">
+            <EntityTypeMapping TypeName="YanaulCRBModel.TriageRecord">
+              <MappingFragment StoreEntitySet="TriageRecords">
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="UserInput" ColumnName="UserInput" />
+                <ScalarProperty Name="DetectedSymptoms" ColumnName="DetectedSymptoms" />
+                <ScalarProperty Name="RecommendedDoctorSpecialty" ColumnName="RecommendedDoctorSpecialty" />
+                <ScalarProperty Name="RecommendedDoctorId" ColumnName="RecommendedDoctorId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="YanaulCRBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccines">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Vaccine">
+              <MappingFragment StoreEntitySet="Vaccine">
+                <ScalarProperty Name="VaccineId" ColumnName="VaccineId" />
+                <ScalarProperty Name="NameRU" ColumnName="NameRU" />
+                <ScalarProperty Name="NameBA" ColumnName="NameBA" />
+                <ScalarProperty Name="DescriptionRU" ColumnName="DescriptionRU" />
+                <ScalarProperty Name="DescriptionBA" ColumnName="DescriptionBA" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+                <ScalarProperty Name="AgeRestrictions" ColumnName="AgeRestrictions" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="NextDoseDays" ColumnName="NextDoseDays" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VirtualQueues">
+            <EntityTypeMapping TypeName="YanaulCRBModel.VirtualQueue">
+              <MappingFragment StoreEntitySet="VirtualQueue">
+                <ScalarProperty Name="QueueId" ColumnName="QueueId" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+                <ScalarProperty Name="QueuePosition" ColumnName="QueuePosition" />
+                <ScalarProperty Name="EstimatedWaitMinutes" ColumnName="EstimatedWaitMinutes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Notified" ColumnName="Notified" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certificates">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Certificate">
+              <MappingFragment StoreEntitySet="Certificate">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EmailSent" ColumnName="EmailSent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+                <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+                <ScalarProperty Name="CertificateText" ColumnName="CertificateText" />
+                <ScalarProperty Name="CertificateType" ColumnName="CertificateType" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientPolicy" ColumnName="PatientPolicy" />
+                <ScalarProperty Name="CertificateId" ColumnName="CertificateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="PatientPolicy" ColumnName="PatientPolicy" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccinations">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Vaccination">
+              <MappingFragment StoreEntitySet="Vaccination">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EmailSent" ColumnName="EmailSent" />
+                <ScalarProperty Name="CertificateUrl" ColumnName="CertificateUrl" />
+                <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
+                <ScalarProperty Name="NextVaccinationDate" ColumnName="NextVaccinationDate" />
+                <ScalarProperty Name="VaccinationDate" ColumnName="VaccinationDate" />
+                <ScalarProperty Name="VaccineName" ColumnName="VaccineName" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientPolicy" ColumnName="PatientPolicy" />
+                <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Referrals">
+            <EntityTypeMapping TypeName="YanaulCRBModel.Referral">
+              <MappingFragment StoreEntitySet="Referral">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="SpecialtyTarget" ColumnName="SpecialtyTarget" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientPolicy" ColumnName="PatientPolicy" />
+                <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SickLeaves">
+            <EntityTypeMapping TypeName="YanaulCRBModel.SickLeave">
+              <MappingFragment StoreEntitySet="SickLeave">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientPolicy" ColumnName="PatientPolicy" />
+                <ScalarProperty Name="SickLeaveId" ColumnName="SickLeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="YanaulCRBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

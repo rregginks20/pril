@@ -1,0 +1,55 @@
+﻿<Page x:Class="YanaulKioskPerfect.FeedbackFormPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Отзывы" Background="#F5F9FC">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="36,28">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                <Button Style="{StaticResource ModernButton}" Background="#81C784" Content="⇦ Назад"
+                        Width="150" Height="54" Click="BtnBack_Click"/>
+                <TextBlock x:Name="TitleText" Text="ОТЗЫВЫ О ВРАЧАХ" FontSize="34" FontWeight="Bold"
+                           Foreground="#00695C" VerticalAlignment="Center" Margin="22,0,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,24,0">
+                        <TextBlock x:Name="DoctorLabel" Text="Выберите врача:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <ComboBox x:Name="DoctorCombo" FontSize="16" Height="50" Padding="12,8" Margin="0,0,0,18"/>
+
+                        <TextBlock x:Name="RatingLabel" Text="Ваша оценка:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <StackPanel x:Name="StarButtonsPanel" Orientation="Horizontal" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="RatingHint" Text="★★★★★ Отлично!" FontSize="17" Foreground="#FF8F00" Margin="0,0,0,18"/>
+
+                        <TextBlock x:Name="CommentLabel" Text="Текст отзыва:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBox x:Name="CommentBox" FontSize="16" Height="120" Padding="14" AcceptsReturn="True"
+                                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,0,0,20"/>
+
+                        <Button x:Name="SubmitBtn" Style="{StaticResource ModernButton}" Background="#4CAF50" Foreground="White"
+                                Content="⭐ ОТПРАВИТЬ ОТЗЫВ" FontSize="18" Height="60" Click="BtnSubmit_Click"/>
+                    </StackPanel>
+
+                    <Border Grid.Column="1" Background="#E8F5E9" CornerRadius="16" Padding="18">
+                        <DockPanel>
+                            <TextBlock Text="⭐ Рейтинг врачей ЦРБ" FontSize="18" FontWeight="Bold" Foreground="#2E7D32"
+                                       DockPanel.Dock="Top" Margin="0,0,0,12"/>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="480">
+                                <ItemsControl x:Name="DoctorsRatingList"/>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

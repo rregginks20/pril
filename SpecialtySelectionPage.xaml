@@ -1,0 +1,52 @@
+﻿<Page x:Class="YanaulKioskPerfect.SpecialtySelectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Выбор специалиста" Background="#F5F9FC">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="40,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок и кнопка назад -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,40">
+                <Button x:Name="BtnBack" Style="{StaticResource ModernButton}" Background="#81C784" 
+                        Content="⇦ Назад" Width="180" Height="70" FontSize="22"
+                        Click="BtnBack_Click"/>
+                <TextBlock x:Name="TitleText" Text="ЗАПИСАТЬСЯ К ВРАЧУ"
+                           FontSize="48" FontWeight="Bold" Foreground="#004D40"
+                           VerticalAlignment="Center" Margin="40,0,0,0"/>
+            </StackPanel>
+
+            <!-- СЕТКА КНОПОК (3 колонки, крупные плитки) -->
+            <UniformGrid Grid.Row="1" Columns="3" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                <!-- Терапевт -->
+                <Button Style="{StaticResource ModernButton}" Background="#2E7D32" 
+                        Content="🩺 Терапевт" FontSize="28" Click="BtnSpecialty_Click" Tag="Терапевт"/>
+
+                <!-- Кардиолог -->
+                <Button Style="{StaticResource ModernButton}" Background="#C62828" 
+                        Content="❤️ Кардиолог" FontSize="28" Click="BtnSpecialty_Click" Tag="Кардиолог"/>
+
+                <!-- Офтальмолог -->
+                <Button Style="{StaticResource ModernButton}" Background="#0277BD" 
+                        Content="👁️ Офтальмолог" FontSize="28" Click="BtnSpecialty_Click" Tag="Окулист"/>
+
+                <!-- Хирург -->
+                <Button Style="{StaticResource ModernButton}" Background="#5E35B1" 
+                        Content="🔪 Хирург" FontSize="28" Click="BtnSpecialty_Click" Tag="Хирург"/>
+
+                <!-- Невролог -->
+                <Button Style="{StaticResource ModernButton}" Background="#EF6C00" 
+                        Content="🧠 Невролог" FontSize="28" Click="BtnSpecialty_Click" Tag="Невролог"/>
+
+                <!-- Педиатр -->
+                <Button Style="{StaticResource ModernButton}" Background="#EC407A" 
+                        Content="🧸 Педиатр" FontSize="28" Click="BtnSpecialty_Click" Tag="Педиатр"/>
+            </UniformGrid>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,338 @@
+﻿<Page x:Class="YanaulKioskPerfect.DoctorWorkplacePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:YanaulKioskPerfect"
+      Title="Рабочее место врача" Background="#F5F9FC">
+
+    <Page.Resources>
+        <local:BoolToIconConverter x:Key="BoolToIconConverter"/>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ЗАГОЛОВОК -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="← Назад" Width="120" Height="40" Click="BtnBack_Click" 
+                    Background="#FF9800" Foreground="White" FontWeight="Bold" Cursor="Hand"/>
+            <TextBlock Text="👨‍️ РАБОЧЕЕ МЕСТО ВРАЧА" FontSize="28" FontWeight="Bold" 
+                       Foreground="#E65100" Margin="20,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- ОСНОВНОЙ КОНТЕНТ С ВКЛАДКАМИ -->
+        <TabControl x:Name="MainTabControl" Grid.Row="1" FontSize="16" Background="Transparent">
+
+            <!-- ==================== ВКЛАДКА 1: ПРИЕМ ПАЦИЕНТА ==================== -->
+            <TabItem Header="🏥 Прием пациента">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ЛЕВАЯ ПАНЕЛЬ: Поиск и История -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0" 
+                            BorderBrush="#E0E0E0" BorderThickness="1" VerticalAlignment="Stretch">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top">
+                                <TextBlock Text="Поиск пациента по полису:" FontSize="14" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <TextBox x:Name="SearchPolicyBox" FontSize="16" Height="40" Margin="0,0,0,15" 
+                                         TextChanged="SearchPolicyBox_TextChanged"/>
+
+                                <Border Background="#E3F2FD" CornerRadius="8" Padding="10" Margin="0,0,0,15">
+                                    <StackPanel>
+                                        <TextBlock Text="Пациент:" FontSize="12" Foreground="Gray"/>
+                                        <TextBlock x:Name="FoundPatientName" Text="-" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
+                                        <TextBlock x:Name="FoundPatientAge" Text="-" FontSize="14" Foreground="#555"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <TextBlock Text="📜 История посещений:" FontSize="14" FontWeight="Bold" Margin="0,0,0,10" DockPanel.Dock="Top"/>
+                            <DataGrid x:Name="HistoryGrid" AutoGenerateColumns="False" HeadersVisibility="Column" 
+                                      FontSize="12" RowHeight="40" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                                      CanUserAddRows="False">
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Background" Value="#FFF3E0"/>
+                                        <Setter Property="Foreground" Value="#E65100"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="Padding" Value="5"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Дата" Binding="{Binding AppointmentTime, StringFormat={}{0:dd.MM}}" Width="50"/>
+                                    <DataGridTextColumn Header="Врач" Binding="{Binding Doctor.FullNameRU}" Width="100"/>
+                                    <DataGridTextColumn Header="Диагноз" Binding="{Binding Diagnosis}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- ПРАВАЯ ПАНЕЛЬ: Оформление приема -->
+                    <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="25" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <!-- ЖИВАЯ ОЧЕРЕДЬ -->
+                                <Border Background="#E8F5E9" CornerRadius="12" Padding="16" Margin="0,0,0,20" BorderBrush="#81C784" BorderThickness="2">
+                                    <StackPanel>
+                                        <TextBlock Text="📢 Живая очередь (сегодня)" FontSize="18" FontWeight="Bold" Foreground="#2E7D32" Margin="0,0,0,10"/>
+                                        <TextBlock x:Name="LblQueueDoctor" Text="Врач: —" FontSize="13" Foreground="#555" Margin="0,0,0,8"/>
+                                        <DataGrid x:Name="LiveQueueGrid" AutoGenerateColumns="False" MaxHeight="160" FontSize="12"
+                                                  IsReadOnly="True" HeadersVisibility="Column" RowHeight="32" Margin="0,0,0,12">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="№" Binding="{Binding QueuePosition}" Width="40"/>
+                                                <DataGridTextColumn Header="Пациент" Binding="{Binding PatientName}" Width="*"/>
+                                                <DataGridTextColumn Header="Талон" Binding="{Binding TicketNumber}" Width="80"/>
+                                                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="90"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button x:Name="BtnCallNextPatient" Content="▶ Вызвать следующего" Height="44" Padding="16,0"
+                                                    Background="#FF9800" Foreground="White" FontWeight="Bold" BorderThickness="0"
+                                                    Click="BtnCallNextPatient_Click" Cursor="Hand" Margin="0,0,10,0"/>
+                                            <Button Content="🔄" Width="44" Height="44" Background="#2196F3" Foreground="White"
+                                                    BorderThickness="0" Click="BtnRefreshQueue_Click" Cursor="Hand"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="LblLastCalled" Text="" FontSize="12" Foreground="#1565C0" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <TextBlock Text="📝 Оформление текущего приема" FontSize="20" FontWeight="Bold" 
+                                           Margin="0,0,0,20" Foreground="#00695C"/>
+
+                                <TextBlock Text="Выберите готовое заключение (шаблон):" FontSize="14" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <ComboBox x:Name="TemplateCombo" FontSize="14" Height="40" Margin="0,0,0,15" 
+                                          SelectionChanged="TemplateCombo_SelectionChanged">
+                                    <ComboBoxItem Content="-- Выберите шаблон --" IsSelected="True"/>
+                                    <ComboBoxItem Content="Здоров. Жалоб нет." Tag="Жалоб нет. Состояние удовлетворительное. Хронические заболевания вне обострения."/>
+                                    <ComboBoxItem Content="ОРВИ. Легкая форма." Tag="Жалобы на насморк, першение в горле. Температура 37.2. Зев гиперемирован. Диагноз: ОРВИ."/>
+                                    <ComboBoxItem Content="Гипертонический криз." Tag="Жалобы на головную боль, головокружение. АД 160/100. Пульс 88. Назначена коррекция терапии."/>
+                                    <ComboBoxItem Content="Гастрит (обострение)." Tag="Жалобы на боли в эпигастрии. Язык обложен. Диета №1. Омез 2р/д."/>
+                                </ComboBox>
+
+                                <TextBlock Text="Текст заключения (можно редактировать):" FontSize="14" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <TextBox x:Name="ConclusionBox" FontSize="14" Height="180" TextWrapping="Wrap" 
+                                         AcceptsReturn="True" Margin="0,0,0,20" VerticalScrollBarVisibility="Auto"
+                                         BorderBrush="#B0BEC5" BorderThickness="1"/>
+
+                                <TextBlock Text="Рекомендации / Лечение:" FontSize="14" FontWeight="Bold" Margin="0,0,0,5"/>
+                                <TextBox x:Name="RecommendationsBox" FontSize="14" Height="120" TextWrapping="Wrap" 
+                                         AcceptsReturn="True" Margin="0,0,0,25" VerticalScrollBarVisibility="Auto"
+                                         BorderBrush="#B0BEC5" BorderThickness="1"/>
+
+                                <!-- КНОПКИ ДЕЙСТВИЙ (ОРИГИНАЛЬНЫЕ) -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                                    <Button x:Name="BtnFinish" Content="✅ Завершить прием" Click="FinishAppointment_Click" 
+                                            Background="#4CAF50" Foreground="White" FontSize="16" Height="50" Width="200" 
+                                            FontWeight="Bold" Cursor="Hand" Margin="0,0,10,0" IsEnabled="False"/>
+
+                                    <Button x:Name="BtnRefer" Content="📄 Направление" Click="Refer_Click" 
+                                            Background="#9C27B0" Foreground="White" FontSize="14" Height="40" Width="120" 
+                                            FontWeight="Bold" Cursor="Hand" Margin="0,0,10,0" IsEnabled="False"/>
+
+                                    <Button x:Name="BtnSickLeave" Content="🏥 Больничный" Click="SickLeave_Click" 
+                                            Background="#F44336" Foreground="White" FontSize="14" Height="40" Width="120" 
+                                            FontWeight="Bold" Cursor="Hand" IsEnabled="False"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ==================== ВКЛАДКА 2: РЕЦЕПТЫ ==================== -->
+            <TabItem Header="💊 Рецепты">
+                <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая часть: Форма выписки рецепта -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,10,0" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="Выберите препарат:" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <ComboBox x:Name="MedicineComboBox" FontSize="16" Height="40" Margin="0,0,0,20"/>
+
+                            <TextBlock Text="Дозировка (как принимать):" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBox x:Name="DosageTextBox" FontSize="14" Height="80" TextWrapping="Wrap" 
+                                     AcceptsReturn="True" Margin="0,0,0,20" 
+                                     ToolTip="Например: по 1 таблетке 3 раза в день после еды"/>
+
+                            <TextBlock Text="Курс лечения (дней):" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBox x:Name="DurationTextBox" FontSize="16" Height="40" Text="7" Margin="0,0,0,20"/>
+
+                            <Button x:Name="BtnPrescribe" Content="📝 Выписать рецепт" Click="Prescribe_Click" 
+                                    Background="#2196F3" Foreground="White" FontSize="18" Height="50" 
+                                    FontWeight="Bold" Cursor="Hand" IsEnabled="False"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Правая часть: Подсказки -->
+                    <Border Grid.Column="1" Background="#E3F2FD" CornerRadius="10" Padding="25">
+                        <StackPanel>
+                            <TextBlock Text="ℹ️ Информация о выписке рецепта" FontSize="20" FontWeight="Bold" 
+                                       Margin="0,0,0,15" Foreground="#1565C0"/>
+                            <TextBlock Text="Здесь врач может выписать электронный рецепт пациенту." FontSize="16" Margin="0,0,0,10" TextWrapping="Wrap"/>
+
+                            <StackPanel Margin="0,10,0,0">
+                                <TextBlock Text="1. Выберите препарат из списка." FontSize="14" Margin="0,0,0,5"/>
+                                <TextBlock Text="2. Укажите точную дозировку и схему приема." FontSize="14" Margin="0,0,0,5"/>
+                                <TextBlock Text="3. Укажите длительность курса лечения в днях." FontSize="14" Margin="0,0,0,5"/>
+                                <TextBlock Text="4. Нажмите кнопку «Выписать рецепт»." FontSize="14" Margin="0,0,0,20"/>
+                            </StackPanel>
+
+                            <Border Background="White" CornerRadius="8" Padding="15" Margin="0,10,0,0">
+                                <TextBlock Text="✅ Рецепт будет сохранен в базу данных и автоматически отправлен в медкарту пациента в раздел «Рецепты». Пациент сможет просмотреть и распечатать его в терминале." 
+                                           FontSize="14" FontStyle="Italic" TextWrapping="Wrap" Foreground="#333"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ==================== ВКЛАДКА 3: ЧАТ С ПАЦИЕНТАМИ ==================== -->
+            <TabItem Header="📩 Чат с пациентами">
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#E8F5E9" CornerRadius="8" Padding="12,8" Margin="0,0,0,10">
+                        <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#2E7D32">
+                            <Run FontWeight="Bold">Как ответить:</Run>
+                            <Run Text=" 1) Выберите пациента в списке слева (двойной щелчок).  2) Напишите ответ внизу.  3) Нажмите «Отправить» — сообщение появится у пациента в терминале."/>
+                        </TextBlock>
+                    </Border>
+                    <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая панель: Список обращений -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="15" Margin="0,0,10,0" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="📋 Новые обращения" FontSize="16" FontWeight="Bold"/>
+                                <Border x:Name="UnreadCountBadge" Background="#F44336" Padding="5,2" CornerRadius="10" Margin="10,0,0,0">
+                                    <TextBlock Text="" FontSize="12" Foreground="White"/>
+                                </Border>
+                                <Button Content="🔄 Обновить" Width="90" Height="30" FontSize="12" Margin="10,0,0,0" 
+                                        Background="#2196F3" Foreground="White" Click="BtnRefreshChat_Click"/>
+                            </StackPanel>
+
+                            <DataGrid x:Name="ChatRequestsGrid" AutoGenerateColumns="False" 
+                                      FontSize="13" IsReadOnly="True" SelectionMode="Single"
+                                      Background="Transparent" BorderThickness="0" RowHeight="50"
+                                      MouseDoubleClick="ChatRequestsGrid_MouseDoubleClick"
+                                      SelectionChanged="ChatRequestsGrid_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Пациент" Binding="{Binding PatientName}" Width="*"/>
+                                    <DataGridTextColumn Header="Вопрос" Binding="{Binding LastMessage}" Width="*"/>
+                                    <DataGridTextColumn Header="Время" Binding="{Binding CreatedAt, StringFormat=HH:mm}" Width="70"/>
+                                    <DataGridTemplateColumn Header="Срочно" Width="60">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IsUrgent, Converter={StaticResource BoolToIconConverter}}" 
+                                                           Foreground="Red" FontWeight="Bold" FontSize="16"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Правая панель: Диалог с пациентом -->
+                    <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="20" 
+                            BorderBrush="#E0E0E0" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Заголовок диалога -->
+                            <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                                <TextBlock x:Name="ChatPatientName" Text="Выберите обращение" FontSize="18" FontWeight="Bold" Foreground="#00695C"/>
+                                <TextBlock x:Name="ChatPatientPolicy" Text="" FontSize="12" Foreground="Gray"/>
+                            </StackPanel>
+
+                            <!-- Область сообщений -->
+                            <Border Grid.Row="1" Background="#FAFAFA" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+                                <ScrollViewer x:Name="DoctorMessagesScroll" VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl x:Name="DoctorMessagesList">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,6">
+                                                    <Border CornerRadius="14" Padding="12,10" MaxWidth="480" HorizontalAlignment="{Binding Alignment}">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding SenderType}" Value="Patient">
+                                                                        <Setter Property="Background" Value="#FFF3E0"/>
+                                                                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding SenderType}" Value="Doctor">
+                                                                        <Setter Property="Background" Value="#C8E6C9"/>
+                                                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding SenderType}" Value="Bot">
+                                                                        <Setter Property="Background" Value="#ECEFF1"/>
+                                                                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding SenderType}" Value="System">
+                                                                        <Setter Property="Background" Value="Transparent"/>
+                                                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding SenderName}" FontSize="11" Foreground="#607D8B" Margin="0,0,0,4"/>
+                                                            <TextBlock Text="{Binding MessageText}" TextWrapping="Wrap" FontSize="14"/>
+                                                            <TextBlock Text="{Binding TimeString}" FontSize="10" Foreground="#90A4AE" HorizontalAlignment="Right" Margin="0,5,0,0"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Border>
+
+                            <!-- Поле ввода ответа -->
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="DoctorInput" FontSize="14" Height="50" Padding="10" 
+                                         VerticalContentAlignment="Center" Margin="0,0,10,0"
+                                         KeyDown="DoctorInput_KeyDown" IsEnabled="False"
+                                         ToolTip="Напишите ответ пациенту. Нажмите Enter для отправки."/>
+
+                                <Button x:Name="BtnSendDoctorMessage" Grid.Column="1" Content="➤ Отправить" Width="110" Height="50" 
+                                        Background="#4CAF50" Foreground="White" FontWeight="Bold" FontSize="14"
+                                        Click="BtnSendDoctorMessage_Click" IsEnabled="False" BorderThickness="0" Cursor="Hand"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Page>

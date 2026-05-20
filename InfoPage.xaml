@@ -1,0 +1,82 @@
+﻿<Page x:Class="YanaulKioskPerfect.InfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Информация" Background="#F5F9FC">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="40,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,40">
+                <Button Style="{StaticResource ModernButton}" Background="#81C784" Content="⇦ Назад" Width="160" Height="60" FontSize="20" Click="BtnBack_Click"/>
+                <TextBlock x:Name="TitleText" Text="ИНФОРМАЦИЯ О БОЛЬНИЦЕ" FontSize="42" FontWeight="Bold" Foreground="#004D40" VerticalAlignment="Center" Margin="30,0,0,0"/>
+            </StackPanel>
+
+            <!-- Контент -->
+            <StackPanel Grid.Row="1" MaxWidth="800" HorizontalAlignment="Center">
+
+                <!-- Блок 1: Режим работы -->
+                <Border Style="{StaticResource CardStyle}" Background="#E8F5E9" Margin="0,0,0,20">
+                    <StackPanel Margin="30">
+                        <TextBlock Text="🕒 РЕЖИМ РАБОТЫ" FontSize="28" FontWeight="Bold" Foreground="#1B5E20" Margin="0,0,0,15"/>
+                        <TextBlock FontSize="18" Foreground="#2E7D32" LineHeight="30">
+                            <Run FontWeight="Bold">Понедельник - Пятница:</Run><LineBreak/>
+                            <Run>08:00 - 20:00 (без перерыва)</Run><LineBreak/><LineBreak/>
+                            <Run FontWeight="Bold">Суббота:</Run><LineBreak/>
+                            <Run>09:00 - 16:00</Run><LineBreak/><LineBreak/>
+                            <Run FontWeight="Bold">Воскресенье:</Run><LineBreak/>
+                            <Run>Выходной день</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Блок 2: Адрес -->
+                <Border Style="{StaticResource CardStyle}" Background="#E3F2FD" Margin="0,0,0,20">
+                    <StackPanel Margin="30">
+                        <TextBlock Text="📍 АДРЕС И КОНТАКТЫ" FontSize="28" FontWeight="Bold" Foreground="#0D47A1" Margin="0,0,0,15"/>
+                        <TextBlock FontSize="18" Foreground="#1565C0" LineHeight="30">
+                            <Run FontWeight="Bold">Адрес:</Run><LineBreak/>
+                            <Run>452800, Республика Башкортостан,</Run><LineBreak/>
+                            <Run>г. Янаул, ул. Худайбердина, 65А</Run><LineBreak/><LineBreak/>
+                            <Run FontWeight="Bold">Телефон регистратуры:</Run><LineBreak/>
+                            <Run FontSize="20" FontWeight="Bold">+7 (34783) 2-14-79</Run><LineBreak/><LineBreak/>
+                            <Run FontWeight="Bold">Приемный покой (Скорая):</Run><LineBreak/>
+                            <Run FontSize="20" FontWeight="Bold" Foreground="#D32F2F">112</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Блок 3: Важно знать -->
+                <Border Style="{StaticResource CardStyle}" Background="#FFF3E0" Margin="0,0,0,20">
+                    <StackPanel Margin="30">
+                        <TextBlock Text="ℹ️ ВАЖНО ЗНАТЬ" FontSize="28" FontWeight="Bold" Foreground="#E65100" Margin="0,0,0,15"/>
+                        <TextBlock FontSize="18" Foreground="#EF6C00" LineHeight="30" TextWrapping="Wrap">
+                            • Для записи к врачу необходим полис ОМС и паспорт.<LineBreak/>
+                            • Приходите на прием за 15 минут до назначенного времени.<LineBreak/>
+                            • Экстренная медицинская помощь оказывается круглосуточно и бесплатно.<LineBreak/>
+                            • При наличии острых симптомов (температура, боль) обратитесь в приемный покой.
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Блок 4: Сайт и соцсети (Опционально) -->
+                <Border Style="{StaticResource CardStyle}" Background="#F3E5F5">
+                    <StackPanel Margin="30">
+                        <TextBlock Text="🌐 ОНЛАЙН СЕРВИСЫ" FontSize="28" FontWeight="Bold" Foreground="#4A148C" Margin="0,0,0,15"/>
+                        <TextBlock FontSize="18" Foreground="#6A1B9A" LineHeight="30">
+                            <Run FontWeight="Bold">Официальный сайт:</Run><LineBreak/>
+                            <Run>crb-yanaul.ru</Run><LineBreak/><LineBreak/>
+                            <Run FontWeight="Bold">Госуслуги:</Run><LineBreak/>
+                            <Run>Запись к врачу доступна через портал Gosuslugi.ru</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

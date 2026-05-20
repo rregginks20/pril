@@ -1,0 +1,54 @@
+﻿<Page x:Class="YanaulKioskPerfect.IdentificationPage"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+Title="Идентификация пациента" Background="#F5F9FC">
+
+    <Grid Margin="40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,40">
+            <TextBlock Text="🏥 ЯНАУЛЬСКАЯ ЦРБ" FontSize="36" FontWeight="Bold" 
+Foreground="#00695C" HorizontalAlignment="Center"/>
+            <TextBlock Text="Введите номер полиса ОМС для записи" FontSize="20" 
+Foreground="Gray" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- Форма ввода -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Background="White" 
+MaxWidth="600" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="40,40">
+
+                <TextBlock Text="📄 Номер полиса ОМС:" FontSize="18" FontWeight="SemiBold" 
+Margin="0,0,0,10"/>
+
+                <TextBox x:Name="PolicyTextBox" FontSize="20" Height="50" 
+Margin="0,0,0,20" TextChanged="PolicyTextBox_TextChanged"/>
+
+                <Button x:Name="BtnIdentify" Content="✅ ПРОДОЛЖИТЬ" 
+Background="#00897B" Foreground="White" Height="60" FontSize="20" 
+FontWeight="Bold" Click="BtnIdentify_Click" Margin="0,0,0,15"
+Cursor="Hand"/>
+
+                <Button Content="👤 Быстрая запись (без полиса)" 
+Background="#E0E0E0" Foreground="#424242" Height="50" FontSize="16"
+Click="BtnQuickAccess_Click" Cursor="Hand" Margin="0,0,0,20"/>
+
+                <TextBlock Text="или запишитесь по телефону" FontSize="14" Foreground="Gray" 
+HorizontalAlignment="Center" Margin="0,10,0,10"/>
+
+                <Button Content="📞 Ввод по номеру телефона" 
+Background="#FFF3E0" Foreground="#E65100" Height="50" FontSize="16"
+Click="BtnPhoneAccess_Click" Cursor="Hand"/>
+
+                <TextBlock Text="💡 Пример: 1234567890123456 (16 цифр)" 
+FontSize="14" Foreground="Gray" HorizontalAlignment="Center" 
+Margin="0,30,0,0" FontStyle="Italic"/>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

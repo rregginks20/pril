@@ -1,0 +1,77 @@
+﻿<Page x:Class="YanaulKioskPerfect.VaccinationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Прививочный сертификат" Background="#F5F9FC">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="← Назад" Width="120" Height="40" Click="BtnBack_Click" 
+                    Background="#E91E63" Foreground="White" FontWeight="Bold"/>
+            <TextBlock Text="💉 Прививочный сертификат" FontSize="28" FontWeight="Bold" 
+                       Foreground="#C2185B" Margin="20,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="VaccinesList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="15" Padding="20" Margin="0,0,0,15" 
+                                BorderBrush="#F8BBD0" BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Иконка шприца -->
+                                <Border Grid.Column="0" Width="60" Height="60" CornerRadius="30" 
+                                        Background="#FCE4EC" Margin="0,0,20,0">
+                                    <TextBlock Text="💉" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Информация о прививке -->
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding VaccineName}" FontSize="18" FontWeight="Bold" Foreground="#C2185B"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                        <TextBlock Text="📅 Дата: " FontSize="14" Foreground="Gray"/>
+                                        <TextBlock Text="{Binding VaccinationDate, StringFormat={}{0:dd.MM.yyyy}}" FontSize="14" FontWeight="SemiBold"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <TextBlock Text="🔢 Серия: " FontSize="14" Foreground="Gray"/>
+                                        <TextBlock Text="{Binding SeriesNumber}" FontSize="14" FontWeight="SemiBold"/>
+                                    </StackPanel>
+
+                                    <!-- Следующая доза (если есть) - убран конвертер, теперь видно всегда если дата есть -->
+                                    <Border Background="#FFF3E0" Padding="8,4" CornerRadius="5" HorizontalAlignment="Left" Margin="0,8,0,0"
+                                            Visibility="{Binding NextVaccinationDate, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
+                                        <!-- Исправление: так как конвертер удален, эта строка тоже выдаст ошибку. 
+                                             Просто удалим всю строку с Border для следующей дозы или оставим без Visibility -->
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="⏰ Следующая доза: " FontSize="13" Foreground="#E65100"/>
+                                            <TextBlock Text="{Binding NextVaccinationDate, StringFormat={}{0:dd.MM.yyyy}}" FontSize="13" FontWeight="Bold" Foreground="#E65100"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Кнопки действий -->
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                    <Button Content="📥 Скачать" Click="SaveVaccine_Click" Tag="{Binding}"
+                                            Background="#E91E63" Foreground="White" Padding="10,5" Margin="0,0,0,5"/>
+                                    <Button Content="🖨️ Печать" Click="PrintVaccine_Click" Tag="{Binding}"
+                                            Background="#FFFFFF" Foreground="#E91E63" BorderBrush="#E91E63" BorderThickness="1" Padding="10,5"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,74 @@
+﻿<Page x:Class="YanaulKioskPerfect.StatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Аналитика ЦРБ" Background="#F5F9FC">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28">
+        <StackPanel>
+            <TextBlock Text="📊 АНАЛИТИКА И ОТЧЁТЫ — ЯНАУЛЬСКАЯ ЦРБ" FontSize="32" FontWeight="Bold" Foreground="#37474F" Margin="0,0,0,8"/>
+            <TextBlock x:Name="LblDbInfo" Text="" FontSize="14" Foreground="#78909C" Margin="0,0,0,24"/>
+
+            <UniformGrid Columns="4" Margin="0,0,0,20">
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="👥 Пациентов" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblPatients" Text="0" FontSize="32" FontWeight="Bold" Foreground="#00695C"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="👨‍⚕️ Врачей" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblDoctorsCount" Text="0" FontSize="32" FontWeight="Bold" Foreground="#0277BD"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="📅 Записей сегодня" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblAppointmentsCount" Text="0" FontSize="32" FontWeight="Bold" Foreground="#2E7D32"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="❌ Отмен сегодня" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblCancelled" Text="0" FontSize="32" FontWeight="Bold" Foreground="#C62828"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <UniformGrid Columns="4" Margin="0,0,0,24">
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="🏠 Вызовов (ожид.)" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblHomeVisitsCount" Text="0" FontSize="32" FontWeight="Bold" Foreground="#EF6C00"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="💰 Платежи всего" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblPaymentsSum" Text="0 ₽" FontSize="26" FontWeight="Bold" Foreground="#6A1B9A"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="💳 Сегодня" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblPaymentsToday" Text="0 ₽" FontSize="26" FontWeight="Bold" Foreground="#8E24AA"/>
+                    </StackPanel>
+                </Border>
+                <Border Background="White" CornerRadius="14" Padding="18" Margin="6" BorderBrush="#B0BEC5" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="⭐ Отзывы" FontSize="15" Foreground="#666"/>
+                        <TextBlock x:Name="LblFeedbacks" Text="0" FontSize="32" FontWeight="Bold" Foreground="#F9A825"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="← Назад в админку" Height="52" Width="220" FontSize="16" FontWeight="Bold"
+                        Background="#455A64" Foreground="White" BorderThickness="0" Margin="0,0,12,0"
+                        Click="BtnBackAdmin_Click" Cursor="Hand"/>
+                <Button Content="🔄 Обновить" Height="52" Width="160" FontSize="16"
+                        Background="#009688" Foreground="White" BorderThickness="0"
+                        Click="BtnRefresh_Click" Cursor="Hand"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

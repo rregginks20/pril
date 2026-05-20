@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb334ec1706947caa43594b881754ca0" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="YanaulCRBModel.AnalysisResult" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.AnalysisType" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Appointment" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.ChatMessage" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Doctor" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.DoctorPhoto" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.HealthMetric" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.HomeVisit" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.MedicalCard" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.PatientPhoto" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Payment" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Prescription" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.SymptomRule" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.TriageRecord" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.User" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Vaccine" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YanaulCRBModel.VirtualQueue" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="YanaulCRBModel.FK_AnalysisResults_AnalysisTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Appointments_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="YanaulCRBModel.FK_VirtualQueue_Appointments" ManuallyRouted="false" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Prescriptions_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Triage_Doctors" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Certificate" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Notification" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Vaccination" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="YanaulCRBModel.Referral" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="YanaulCRBModel.SickLeave" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="YanaulCRBModel.sysdiagram" Width="1.5" PointX="14.375" PointY="8.75" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Certificate_Doctor" />
+        <AssociationConnector Association="YanaulCRBModel.FK_DoctorPhoto_Doctor" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Referral_Doctor" />
+        <AssociationConnector Association="YanaulCRBModel.FK_SickLeave_Doctor" />
+        <AssociationConnector Association="YanaulCRBModel.FK_Vaccination_Doctor" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

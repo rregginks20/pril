@@ -1,0 +1,24 @@
+﻿<Window x:Class="YanaulKioskPerfect.SplashScreenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Загрузка..." Height="400" Width="600"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Border Background="#00695C" CornerRadius="20" BorderBrush="#004D40" BorderThickness="2">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="🏥" FontSize="80" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <TextBlock Text="ЯНАУЛЬСКАЯ ЦРБ" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Загрузка системы..." FontSize="18" Foreground="#B2DFDB" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+                <!-- Индикатор прогресса -->
+                <ProgressBar IsIndeterminate="True" Height="6" Width="300" Margin="0,30,0,0" 
+                             Background="#004D40" Foreground="#4DB6AC"/>
+
+                <TextBlock x:Name="StatusText" Text="Подключение к базе данных..." FontSize="14" Foreground="#80CBC4" 
+                           HorizontalAlignment="Center" Margin="0,15,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
