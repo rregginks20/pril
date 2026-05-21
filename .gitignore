@@ -1,29 +1,36 @@
 ```
-# Build artifacts
+# Dependencies
 bin/
 obj/
-*.exe
-*.dll
-*.pdb
+packages/
+*.nupkg
+*.snupkg
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Dd]eploy/
+[Bb]uild/
+
+# IDE
+.vs/
+*.user
+*.userosscache
+*.suo
+*.csproj.user
+*.vbproj.user
+*.fsproj.user
 *.userprefs
 
-# Dependencies
-packages/
-
-# Logs
-*.log
-
-# OS generated files
+# OS
 .DS_Store
 Thumbs.db
-
-# Visual Studio files
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Temporary files
-*.tmp
-*.temp
+ehthumbs.db
+Icon?
+desktop.ini
+$RECYCLE.BIN/
 ```

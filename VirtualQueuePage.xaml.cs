@@ -54,17 +54,27 @@ namespace YanaulKioskPerfect
                 {
                     int? filterDoctorId = myStatus.IsInQueue ? (int?)myStatus.DoctorId : null;
 
-                    var query = db.VirtualQueues
+                    // Сначала загружаем данные в память, чтобы избежать ошибок EF
+                    var allQueues = db.VirtualQueues
                         .Include(v => v.Appointment)
                         .Include(v => v.Appointment.Doctor)
+                        .ToList();
+
+                    var today = DateTime.Now.Date;
+                    var tomorrow = today.AddDays(1);
+
+                    var query = allQueues
                         .Where(v => (v.Status == QueueService.StatusWaiting || v.Status == QueueService.StatusCalled)
-                            && v.Appointment.AppointmentTime >= DateTime.Now.Date
-                            && v.Appointment.AppointmentTime < DateTime.Now.Date.AddDays(1));
+                            && v.Appointment != null
+                            && v.Appointment.AppointmentTime >= today
+                            && v.Appointment.AppointmentTime < tomorrow)
+                        .OrderBy(v => v.QueuePosition)
+                        .Take(12);
 
                     if (filterDoctorId.HasValue)
                         query = query.Where(v => v.Appointment.DoctorId == filterDoctorId.Value);
 
-                    var queueList = query.OrderBy(v => v.QueuePosition).Take(12).ToList();
+                    var queueList = query.ToList();
 
                     if (QueueHeaderText != null)
                     {
